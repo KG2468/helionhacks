@@ -53,7 +53,7 @@ def _make_kernel(config: helion.Config):
             bias = b[rd].to(torch.float32)[:, None]
             acc  = hl.zeros([rd, rs], dtype=torch.float32) + bias
 
-            for j in hl.specialize(range(W)):
+            for j in range(W):
                 c = w[rd, j].to(torch.float32)
                 x = hl.load(x_pad, [bi, rd, rs.index + j]).to(torch.float32)
                 acc = acc + x * c[:, None]
