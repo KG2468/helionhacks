@@ -1,8 +1,14 @@
 import argparse
 import inspect
+import sys
 from collections.abc import Iterable
+from pathlib import Path
 
 import torch
+
+THIS_DIR = Path(__file__).resolve().parent
+if str(THIS_DIR) not in sys.path:
+    sys.path.insert(0, str(THIS_DIR))
 
 import submission
 
