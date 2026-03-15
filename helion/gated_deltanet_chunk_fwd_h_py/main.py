@@ -22,10 +22,11 @@ def _shape_key(shape_text: str) -> tuple[int, int, int, int, int]:
 
 def _make_inputs(shape: tuple[int, int, int, int, int], device: str, dtype: torch.dtype):
     b, t, h, k, v = shape
-    k_t = torch.randn(b, t, h, k, device=device, dtype=dtype)
-    w_t = torch.randn(b, t, h, k, device=device, dtype=dtype)
-    u_t = torch.randn(b, t, h, v, device=device, dtype=dtype)
-    g_t = torch.randn(b, t, h, device=device, dtype=dtype)
+    scale = 0.05
+    k_t = torch.randn(b, t, h, k, device=device, dtype=dtype) * scale
+    w_t = torch.randn(b, t, h, k, device=device, dtype=dtype) * scale
+    u_t = torch.randn(b, t, h, v, device=device, dtype=dtype) * scale
+    g_t = -2.0 + 0.1 * torch.randn(b, t, h, device=device, dtype=dtype)
     return k_t, w_t, u_t, g_t
 
 

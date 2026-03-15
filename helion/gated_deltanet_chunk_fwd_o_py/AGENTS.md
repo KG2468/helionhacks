@@ -1,0 +1,21 @@
+## Skills
+A skill is a local instruction bundle stored in `SKILL.md`.
+
+### Available skills
+- popcorn-submission-workflow: Helps with Popcorn CLI registration, submission setup, submission modes, and file directives. (file: /Users/kinjal/Code/helionhack/helion/gated_deltanet_chunk_fwd_o_py/.popcorn/skills/popcorn-submission-workflow/SKILL.md)
+- load-inline-native-code: Helps write CUDA and HIP kernels using torch.utils.cpp_extension.load_inline(). Use when writing native GPU code inside a Python submission. (file: /Users/kinjal/Code/helionhack/helion/gated_deltanet_chunk_fwd_o_py/.popcorn/skills/load-inline-native-code/SKILL.md)
+
+### How to use skills
+- Load the skill by reading its `SKILL.md` file when user requests match the description.
+- Follow progressive disclosure: read only relevant referenced files/scripts as needed.
+- Keep the workspace setup aligned with `popcorn setup`.
+
+### Autotune quick commands (`main.py`)
+- Default compile backend (full autotune, benchmark shapes):
+	- `python main.py --benchmark-only --effort full --device cuda --dtype float16`
+- TileIR backend:
+	- `python main.py --benchmark-only --effort full --tileir --device cuda --dtype float16`
+- CompileIQ with auto-discovered ACFs in `/opt/booster_pack`:
+	- `python main.py --benchmark-only --effort full --compileiq --acf-dir /opt/booster_pack --max-acfs 8 --device cuda --dtype float16`
+- CompileIQ with selected ACF files:
+	- `python main.py --benchmark-only --effort full --compileiq --acf fp8_group_quant_6.acf --acf your_other.acf --acf-dir /opt/booster_pack --device cuda --dtype float16`
